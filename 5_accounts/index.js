@@ -158,3 +158,22 @@ function getAccount(accountName) {
   });
   return JSON.parse(accountJSON);
 }
+
+function getAccountBalance(accountName) {
+ inquirer.prompt([
+    {
+      name: 'accountName',
+      message: 'Qual o nome da sua conta?',
+    },
+  ]).then((answer) => {
+    const accountName = answer['accountName'];
+    if (!checkAccount(accountName)) {
+      return getAccountBalance();
+    }
+    const accountData = getAccount(accountName);
+    console.log(chalk.bgBlue.black(`Olá, o saldo da sua conta é R$${accountData.balance}`));
+    operation();
+  }
+  ).catch((err) => console.error(err));
+}
+  
