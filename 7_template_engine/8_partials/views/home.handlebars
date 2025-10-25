@@ -1,0 +1,15 @@
+<h1>Olá, mundo!</h1>
+<p>Bem-vindo ao meu site!</p>
+<p>Nome: {{user.name}}</p>
+<p>Idade: {{user.age}}</p>
+{{#if approved}}
+    <p>Status: Aprovado</p>
+{{else}}
+    <p>Status: Não aprovado</p>
+{{/if}}
+
+{{#if auth}}
+    <p>Status: Autenticado <a href="/dashboard">Clique aqui</a></p>
+{{else}}
+    <p>Status: Não autenticado</p>
+{{/if}}
