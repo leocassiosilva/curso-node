@@ -60,9 +60,9 @@ app.get('/users/:id', async (req, res) => {
 
 app.get('/users/edit/:id', async (req, res) => {
     const id = req.params.id;
-    const user = await User.findOne({ raw: true, where: { id: id } });
+    const user = await User.findOne({ include: Address, where: { id: id } });
     console.log(user);
-    res.render('useredit', { user });
+    res.render('useredit', { user:user.get({plain:true}) });
 });
 
 app.post('/users/update', async (req, res) => {
@@ -103,6 +103,12 @@ app.post('/address/create', async (req, res) => {
 });
 
 
+app.get('/address/:id', async (req, res) => {
+    const id = req.params.id;
+    const address = await Address.findAll({ raw: true, where: { UserId: id } });
+    console.log(address);
+    res.render('addressview', { address });
+});
 
 conn.sync().then(() => {
     console.log('Banco de dados sincronizado!');
