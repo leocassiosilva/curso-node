@@ -1,0 +1,46 @@
+<h1>Editando: {{user.name}}</h1>
+<div class="address-container">
+    <form action="/users/update/{{user.id}}" method="POST">
+        
+        <input type="hidden" name="id" value="{{user.id}}">
+        <div class="form-control">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" value="{{user.name}}">
+            <br>
+        </div>
+
+        <div class="form-control">
+            <label for="occupation">Cargo:</label>
+            <input type="text" id="occupation" name="occupation" value="{{user.occupation}}">
+            <br>
+        </div>
+        
+        <div class="form-control form-checkbox">
+            <label for="newsletter">Deseja receber a newsletter?</label>
+            <input type="checkbox" id="newsletter" name="newsletter" {{#if user.newsletter}}checked{{/if}}>
+            <br>
+        </div>
+        <button type="submit">Atualizar</button>
+    </form>
+</div>
+<div class="address-container">
+    <form action="/address/create" method="POST">
+        <input type="hidden" name="UserId" value="{{user.id}}">
+        <div class="form-control">
+            <label for="street">Rua:</label>
+            <input type="text" id="street" name="street">
+            <br>    
+        </div>  
+        <div class="form-control">
+            <label for="number">Número:</label>
+            <input type="text" id="number" name="number">
+            <br>
+        </div>
+        <div class="form-control">
+            <label for="city">Cidade:</label>
+            <input type="text" id="city" name="city">
+            <br>
+        </div>
+        <button type="submit">Adicionar Endereço</button>
+    </form>
+</div>
