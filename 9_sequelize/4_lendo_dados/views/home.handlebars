@@ -1,9 +1,10 @@
 
-<div>
-    <h2>Lista de Usuários</h2>
-    <ul>
-        {{#each users}}
-            <li>{{this.name}} - {{this.email}}</li>
-        {{/each}}
-    </ul>
+<h2>Lista de Usuários</h2>
+<div class="container">
+    {{#each users}}
+        <div class="item">
+            <p>{{this.name}}</p>
+        </div>
+    {{/each}}
+    
 </div>

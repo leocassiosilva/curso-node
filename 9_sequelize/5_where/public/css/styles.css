@@ -76,6 +76,15 @@ h1{
     border-radius: 5px;
     flex:1 1 29%;
     max-width: 29%;
-    height: 75px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
+.item h2, .item p{
+    margin-bottom: 0.8em;
+}
+
+.actions{
+    display: flex;
 }
