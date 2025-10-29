@@ -110,6 +110,18 @@ app.get('/address/:id', async (req, res) => {
     res.render('addressview', { address });
 });
 
+
+app.post('/address/delete/:id', async (req, res) => {
+    const id = req.params.id;
+    const UserId = req.body.UserId;
+    const address = await Address.findOne({ where: { id: id } });
+    if (address) {
+        await address.destroy();
+    }
+    res.redirect('/users/edit/' + UserId);
+});
+
+
 conn.sync().then(() => {
     console.log('Banco de dados sincronizado!');
     app.listen(3000);
