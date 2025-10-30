@@ -61,3 +61,50 @@ footer span {
     font-weight: bold;
     color: #f6982d;
 }
+
+/*Login e Register */
+.auth-container{
+    max-width: 450px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-container h2{
+    margin-bottom: 1em;
+    color: #fff;    
+    border-left: #f6982d 4px solid;
+    padding: 0.3em;
+    width: 100px;
+}
+
+.form-control{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+
+.form-control label{
+    margin-bottom: 0.5em;
+}
+
+.form-control input,
+.form-control textarea{
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form input[type='submit']{
+    background-color: #f6982d;
+    color: #fff;
+    border: none;
+    padding: 0.7em;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+form input[type='submit']:hover{
+    background-color: #e07b1c;
+}
