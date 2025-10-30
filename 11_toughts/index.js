@@ -10,6 +10,16 @@ const conn = require('./db/conn');
 const Tought = require('./models/Tought');
 const User = require('./models/User');
 
+//Importação das Rotas
+const toughtsRoutes = require('./routes/toughtsRoutes');
+
+const authRoutes = require('./routes/authRoutes');
+
+//Importando Controller
+const ToughtsController = require('./controllers/ToughtsController');
+
+
+
 const app = express();
 
 // Configuração do Handlebars
@@ -56,6 +66,16 @@ app.use((req, res, next) => {
     }
     next();
 });
+
+
+//Routes
+app.use('/toughts', toughtsRoutes);
+app.use('/', authRoutes);
+
+
+
+//Rota Home
+app.get('/', ToughtsController.showToughts);
 
 // Conexão com o banco e inicialização do servidor
 conn
