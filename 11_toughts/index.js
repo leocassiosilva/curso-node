@@ -80,7 +80,7 @@ app.get('/', ToughtsController.showToughts);
 // Conexão com o banco e inicialização do servidor
 conn
   .sync()
-//   .sync({ force: true })
+  // .sync({ force: true })
   .then(() => {
     app.listen(3000);
     console.log('Servidor iniciado na porta 3000: http://localhost:3000');

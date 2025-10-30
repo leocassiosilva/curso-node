@@ -49,6 +49,22 @@
     min-height: 60vh;
     padding: 2em;
 }
+
+/* Message Styles */
+.message {
+  padding: 1em;
+  color: #004085;
+  background-color: #cce5ff;
+  border: 1px soli d#b8daff;
+  border-radius: 5px;
+  text-align: center;
+  margin: 0 auto 2em;
+  max-width: 60%;
+}
+
+
+
+
 /* Footer Styles */
 footer{
     text-align: center;
@@ -89,22 +105,29 @@ footer span {
 }
 
 .form-control input,
-.form-control textarea{
-    padding: 0.5em;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.form-control textarea {
+  padding: 7px;
+  border-radius: 3px;
+  border: 1px solid #f6982d;
 }
 
-form input[type='submit']{
-    background-color: #f6982d;
-    color: #fff;
-    border: none;
-    padding: 0.7em;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
+form input[type='submit'],
+.btn {
+  background-color: transparent;
+  color: #f6982d;
+  border: 2px solid #f6982d;
+  padding: 0.5em 1.3em;
+  margin-bottom: 1em;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.5s;
 }
 
-form input[type='submit']:hover{
-    background-color: #e07b1c;
+form input[type='submit']:hover,
+.btn:hover {
+  background-color: #f6982d;
+  color: #fff;
 }
