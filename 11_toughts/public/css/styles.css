@@ -131,3 +131,47 @@ form input[type='submit']:hover,
   background-color: #f6982d;
   color: #fff;
 }
+
+/* Dashboard Styles */
+.title-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+
+.title-container h2 {
+    border-left: #f6982d 4px solid;
+    padding: 0.3em;
+}
+
+.dashboard h3{
+    margin-bottom: 1.5em;
+}
+
+.dashboard ul{
+    list-style: none;
+}
+
+.dashboard li {
+    padding: 12px;
+    border-bottom: 1px solid #f6982d;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard .label{
+    font-weight: bold;
+    color: #f6982d;
+    margin-right: 2em;   
+}
+
+.dashboard .actions{
+    display: flex;
+}
+
+.dashboard .actions .btn{
+    color: #FFF;
+    border-color: #FFF;
+    margin: 0 0.5em;
+}
