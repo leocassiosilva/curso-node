@@ -1,6 +1,9 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
 const createUserToken = require('../helpers/create-user-token');
+const getToken = require('../helpers/get-token');
 
 module.exports = class UserController {
 
@@ -66,5 +69,51 @@ module.exports = class UserController {
 
 
     }
+
+    static async login(req, res) {
+        const {email, password} = req.body;
+
+        //validations
+        if(!email) {
+            res.status(422).json({message: 'O email é obrigatório!'});
+            return
+        }
+        if(!password) {
+            res.status(422).json({message: 'A senha é obrigatória!'});
+            return
+        }   
+
+        //check if user exists
+        const user = await User.findOne({where: {email: email}});
+
+        if(!user) {
+            res.status(422).json({message: 'Usuário não encontrado!'});
+            return
+        }
+
+        //check if password match
+        const checkPassword = await bcrypt.compare(password, user.password);
+
+        if(!checkPassword) {
+            res.status(422).json({message: 'Senha inválida!'});
+            return
+        }
+        await createUserToken(user, req, res);
+    }
+    static async checkUser(req, res) {
+        let currentUser;
+        console.log(req.headers.authorization);
+        if(req.headers.authorization) {
+            const token = getToken(req);
+            const decoded = jwt.verify(token, "nossosecret");
+            currentUser = await User.findById(decoded.id);
+            currentUser.password = undefined;
+
+        }else {
+            currentUser = null;
+        }
+        res.status(200).json(currentUser);
+    }
+
 
 }
