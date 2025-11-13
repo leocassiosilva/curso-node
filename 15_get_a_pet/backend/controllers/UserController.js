@@ -168,14 +168,6 @@ module.exports = class UserController {
 
         user.phone = phone;
 
-        if(!password) {
-            res.status(422).json({message: 'A senha é obrigatória!'});
-            return
-        }
-        if(!confirmpassword) {
-            res.status(422).json({message: 'A confirmação de senha é obrigatória!'});
-            return 
-        }
         
         if(password !== confirmpassword) {
             res.status(422).json({message: 'A senha e a confirmação de senha precisam ser iguais!'});
@@ -193,7 +185,7 @@ module.exports = class UserController {
         }
         
         try {
-           const updatedUser = await User.update(
+           const updatedUser = await User.findOneAndUpdate(
             {_id: user._id},
             {$set: user},
             {new: true},
