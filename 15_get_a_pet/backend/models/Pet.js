@@ -34,4 +34,4 @@ const Pet = mongoose.model('Pet', new Schema({
     ),
 ) 
 
-module.exports = User;
+module.exports = Pet;
