@@ -13,7 +13,10 @@ module.exports = class PetController {
         const {name, age, weight, color } = req.body;
 
         const available = true;
-
+        const images = req.files
+        if (!images || images.length === 0) {
+            return res.status(422).json({ message: "A imagem é obrigatória!" });
+        }
         if(!name) {
             res.status(422).json({message: "O nome é obrigatório!"});
             return;
@@ -33,6 +36,9 @@ module.exports = class PetController {
             res.status(422).json({message: "A cor é obrigatória!"});
             return;
         }
+
+
+
         //get pet owner
         const token = getToken(req);
         const user = await getUserByToken(token);
@@ -51,6 +57,11 @@ module.exports = class PetController {
                 image: user.image,
                 phone: user.phone,
             },
+        });
+
+        //upload images
+        images.map((image) => {
+            pet.images.push(image.filename);
         });
 
         //salvando pets
