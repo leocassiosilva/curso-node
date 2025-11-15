@@ -127,6 +127,60 @@ router.get("/:id", PetController.getPetById);
  *       404:
  *         description: Pet não encontrado
  */
-router.delete("/:id", verifyToken, PetController.deletePetById);
+router.delete("/:id", verifyToken, PetController.removePetById);
 
+
+/**
+ * * @swagger
+ * /pets/{id}:
+ *  patch:
+ *    summary: Atualiza os dados de um pet pelo ID (token obrigatório)
+ *   tags: [Pets]
+ *   security:
+ *     - bearerAuth: []
+ *   parameters:
+ *    - in: path
+ *     name: id
+ *    required: true
+ *    schema:
+ *     type: string
+ *    description: ID do pet
+ * 
+ *  requestBody:
+ *    required: false
+ * 
+ *  content:
+ *    multipart/form-data:
+ *     schema:
+ *      type: object
+ *     properties:
+ *      name:
+ *      type: string
+ *     age:
+ *  
+ *  
+ *  
+ *    type: number
+ *  weight:
+ *  
+ *   type: number
+ * color:
+ *   type: string
+ * available:
+ *  type: boolean
+ *  images:
+ *   type: array
+ *  items:
+ *    type: string
+ *  
+ *   format: binary
+ *  
+ *   responses:
+ *    200:
+ *    description: Pet atualizado com sucesso
+ *   404:
+ *    description: Pet não encontrado
+ *  
+ */
+router.patch("/:id", verifyToken, imageUpload.array("images"), PetController.updatePetById);
 module.exports = router;
