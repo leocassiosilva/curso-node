@@ -72,6 +72,43 @@ module.exports = class PetController {
             res.status(500).json({message: "Erro ao cadastrar pet.", error: error.message});
         }
     }
+
+    static async getAll(req, res) {
+        const pets = await Pet.find().sort("-createdAt");
+        res.status(200).json({ pets: pets });
+    }
+
+    static async getUserPets(req, res) {
+        //get user from token
+        const token = getToken(req);
+        const user = await getUserByToken(token);
+
+        const pets = await Pet.find({ "user._id": user._id }).sort("-createdAt");
+        res.status(200).json({ pets: pets });
+    }
+
+    static async getAllUserAdoptions(req, res) {
+        //get user from token
+        const token = getToken(req);
+        const user = await getUserByToken(token);
+
+        const pets = await Pet.find({ "adopter._id": user._id }).sort("-createdAt");
+        res.status(200).json({ pets: pets });
+    }
+
+    static async getPetById(req, res) {
+        const id = req.params.id;
+        const pet = await Pet.findById(id);
+
+        if(!pet) {
+            res.status(404).json({message: "Pet não encontrado!"});
+            return;
+        }
+        res.status(200).json({ pet: pet });
+    }
+
+
+
 }
 
 
