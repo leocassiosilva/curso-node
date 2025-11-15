@@ -74,7 +74,7 @@ module.exports = class PetController {
     }
 
     static async getAll(req, res) {
-        const pets = await Pet.find().sort("-createdAt");
+        const pets = await Pet.find({available: true}).sort("-createdAt");
         res.status(200).json({ pets: pets });
     }
 
@@ -241,7 +241,31 @@ module.exports = class PetController {
         };
         await Pet.findByIdAndUpdate(id, pet);
         res.status(200).json({message: `Visita agendada com sucesso! Entre em contato com ${pet.user.name} pelo telefone ${pet.user.phone}`});
-        
+
+    }
+
+    static async concludeAdoptionById(req, res) {
+        const id = req.params.id;
+
+        //check if pet exists
+        const pet = await Pet.findById(id);
+        if(!pet) {
+            res.status(404).json({message: "Pet não encontrado!"});
+            return;
+        }
+
+        const token = getToken(req);
+        const user = await getUserByToken(token);
+
+        //verificar se o pet pertence ao usuário
+        if(pet.user._id.toString() !== user._id.toString()) {
+            res.status(422).json({message: "Houve um problema ao processar sua solicitação, tente novamente mais tarde."});
+            return;
+        }
+        pet.available = false;
+        await Pet.findByIdAndUpdate(id, pet);
+        res.status(200).json({message: "Parabéns! A adoção foi concluída com sucesso."});
+
     }
 }
 

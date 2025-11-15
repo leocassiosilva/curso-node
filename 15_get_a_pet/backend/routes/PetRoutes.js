@@ -207,4 +207,27 @@ router.patch("/:id", verifyToken, imageUpload.array("images"), PetController.upd
  */
 router.patch('/schedule/:id', verifyToken, PetController.schedulePetById);
 
+/** 
+ * @swagger
+ * /pets/conclude/{id}:
+ *   patch: 
+ *    summary: Conclui a adoção de um pet pelo ID (token obrigatório)
+ *   tags: [Pets]
+ *   security:
+ *    - bearerAuth: []
+ *  parameters:
+ *    - in: path
+ *     name: id
+ *   required: true
+ *    schema:
+ *   type: string
+ *   description: ID do pet
+ *  responses:
+ *   200:
+ *    description: Adoção concluída com sucesso
+ *  404:
+ *   description: Pet não encontrado
+ * ////
+ */
+router.patch('/conclude/:id', verifyToken, PetController.concludeAdoptionById);
 module.exports = router;
