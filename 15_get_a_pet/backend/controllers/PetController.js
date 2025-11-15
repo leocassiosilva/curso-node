@@ -128,11 +128,14 @@ module.exports = class PetController {
             return;
         }
         
+        //verificar se o pet pertence ao usuário
         if(pet.user._id.toString() !== user._id.toString()) {
             res.status(422).json({message: "Houve um problema ao processar sua solicitação, tente novamente mais tarde."});
             return;
         }
-     
+        
+        await Pet.findByIdAndRemove(id);
+        res.status(200).json({message: "Pet removido com sucesso!"});
 
     }
 }
