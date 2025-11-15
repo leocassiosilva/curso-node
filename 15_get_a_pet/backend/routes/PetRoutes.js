@@ -106,4 +106,27 @@ router.get("/myadoptions", verifyToken, PetController.getAllUserAdoptions);
  */
 router.get("/:id", PetController.getPetById);
 
+/**
+ * @swagger
+ * /pets/{id}:
+ *   delete:
+ *     summary: Deleta um pet pelo ID (token obrigatório)
+ *     tags: [Pets]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID do pet
+ *     responses:
+ *       200:
+ *         description: Pet deletado com sucesso
+ *       404:
+ *         description: Pet não encontrado
+ */
+router.delete("/:id", verifyToken, PetController.deletePetById);
+
 module.exports = router;
