@@ -183,4 +183,28 @@ router.delete("/:id", verifyToken, PetController.removePetById);
  *  
  */
 router.patch("/:id", verifyToken, imageUpload.array("images"), PetController.updatePetById);
+
+/**
+ * @swagger
+ * /pets/schedule/{id}:
+ *   patch:
+ *     summary: Agenda a adoção de um pet pelo ID (token obrigatório)
+ *     tags: [Pets]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID do pet
+ *     responses:
+ *       200:
+ *         description: Adoção agendada com sucesso
+ *       404:
+ *         description: Pet não encontrado
+ */
+router.patch('/schedule/:id', verifyToken, PetController.schedulePetById);
+
 module.exports = router;
