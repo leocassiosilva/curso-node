@@ -1,13 +1,109 @@
 const router = require("express").Router();
 const PetController = require("../controllers/PetController");
-//middleware
+// middleware
 const verifyToken = require("../helpers/verify-token");
-const {imageUpload} = require("../helpers/image-upload");
+const { imageUpload } = require("../helpers/image-upload");
 
+/**
+ * @swagger
+ * tags:
+ *   name: Pets
+ *   description: Endpoints relacionados a pets
+ */
+
+/**
+ * @swagger
+ * /pets/create:
+ *   post:
+ *     summary: Cria um novo pet
+ *     tags: [Pets]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               age:
+ *                 type: number
+ *               weight:
+ *                 type: number
+ *               color:
+ *                 type: string
+ *               images:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                   format: binary
+ *     responses:
+ *       201:
+ *         description: Pet criado com sucesso
+ */
 router.post("/create", verifyToken, imageUpload.array("images"), PetController.create);
+
+/**
+ * @swagger
+ * /pets:
+ *   get:
+ *     summary: Lista todos os pets disponíveis
+ *     tags: [Pets]
+ *     responses:
+ *       200:
+ *         description: Lista de pets
+ */
 router.get("/", PetController.getAll);
+
+/**
+ * @swagger
+ * /pets/mypets:
+ *   get:
+ *     summary: Lista todos os pets do usuário logado
+ *     tags: [Pets]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Lista dos pets do usuário
+ */
 router.get("/mypets", verifyToken, PetController.getUserPets);
+
+/**
+ * @swagger
+ * /pets/myadoptions:
+ *   get:
+ *     summary: Lista as adoções feitas pelo usuário logado
+ *     tags: [Pets]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Lista de pets adotados
+ */
 router.get("/myadoptions", verifyToken, PetController.getAllUserAdoptions);
+
+/**
+ * @swagger
+ * /pets/{id}:
+ *   get:
+ *     summary: Obtém detalhes de um pet específico
+ *     tags: [Pets]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID do pet
+ *     responses:
+ *       200:
+ *         description: Detalhes do pet
+ *       404:
+ *         description: Pet não encontrado
+ */
 router.get("/:id", PetController.getPetById);
 
 module.exports = router;
