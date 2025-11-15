@@ -1,3 +1,136 @@
+/**
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: Endpoints relacionados aos usuários
+ */
+
+/**
+ * @swagger
+ * /users/register:
+ *   post:
+ *     summary: Registra um novo usuário
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [name, email, password, phone, confirmpassword]
+ *             properties:
+ *               name:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               phone:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               confirmpassword:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Usuário criado com sucesso
+ *       422:
+ *         description: Erro de validação
+ */
+
+/**
+ * @swagger
+ * /users/login:
+ *   post:
+ *     summary: Realiza login do usuário
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [email, password]
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Login realizado com sucesso
+ *       422:
+ *         description: Credenciais inválidas
+ */
+
+/**
+ * @swagger
+ * /users/checkuser:
+ *   get:
+ *     summary: Verifica o usuário logado pelo token
+ *     tags: [Users]
+ *     responses:
+ *       200:
+ *         description: Usuário encontrado ou null
+ */
+
+/**
+ * @swagger
+ * /users/{id}:
+ *   get:
+ *     summary: Busca usuário pelo ID
+ *     tags: [Users]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Usuário encontrado
+ *       422:
+ *         description: Usuário não encontrado
+ */
+
+/**
+ * @swagger
+ * /users/edit/{id}:
+ *   patch:
+ *     summary: Edita um usuário (token obrigatório)
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: false
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               phone:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               confirmpassword:
+ *                 type: string
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       200:
+ *         description: Usuário atualizado com sucesso
+ *       422:
+ *         description: Dados inválidos ou usuário não encontrado
+ */
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
