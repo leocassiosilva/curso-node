@@ -1,0 +1,33 @@
+.form_container {
+    max-width: 300px;
+    margin:0 auto;
+    background-color: #FFF;
+    border-radius: 15px;
+}
+
+.form_container input[type="submit"] {
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #25b456;
+    color: #FFF;
+    border: none;
+    min-width: 100%;
+    min-height: 2.5em;
+    width: 100%;
+    font-size: 1.2em;
+    font-weight: bold;
+
+}
+
+.form_container input[type="submit"]:hover {
+    background-color: #1ea144;
+}
+
+.form_container p{
+    margin-top: 1em;
+}
+.form_container p a{
+    color: #2552b4;
+    text-decoration: none;
+    font-weight: bold;
+}

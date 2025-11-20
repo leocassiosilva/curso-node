@@ -6,13 +6,18 @@ import Footer from './components/layout/Footer';
 import Container from './components/layout/Container';
 
 /* pages*/ 
-import Home from './components/pages/Auth/Home';
+import Home from './components/pages/Home';
 import Register from './components/pages/Auth/Register';
 import Login from './components/pages/Auth/Login';
+
+
+/** context */
+import {UserProvider} from './context/UserContext';
 
 function App() {
   return (
     <Router>
+      <UserProvider>
         <Navbar />
         <Container>
           <Routes>
@@ -22,6 +27,7 @@ function App() {
           </Routes>
         </Container>
         <Footer />
+      </UserProvider>
     </Router>
   );
 }
