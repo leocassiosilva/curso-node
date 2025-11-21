@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useState, useContext} from "react";
 import Input from "../../form/Input"; 
 import {Link} from 'react-router-dom';
+
+/* contexts */
+import { Context } from '../../../context/UserContext'; 
+
+
 
 import styles from '../../form/Form.module.css'
 function Register() {
     const [user, setUser] = useState({});
+    const { register } = useContext(Context)
 
 
     
@@ -19,6 +25,8 @@ function Register() {
     e.preventDefault();
     console.log(user);
     // depois você pode enviar para o backend
+    register(user)
+
     }
 
 
