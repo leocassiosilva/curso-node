@@ -3,7 +3,7 @@ import api from '../utils/api';
 
 // hook
 import useFlashMessage from './useFlashMessage';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function useAuth() {
@@ -12,6 +12,15 @@ export default function useAuth() {
 
     // Hook correto para navegação (React Router v6+)
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
+            setAuthenticated(true);
+        }
+    }, []);
+
 
     async function register(user) {
         let msgText = 'Cadastro realizado com sucesso!';
@@ -41,5 +50,5 @@ export default function useAuth() {
         navigate('/');
     }
 
-    return { register, authUser };
+    return { authenticated, register };
 }
