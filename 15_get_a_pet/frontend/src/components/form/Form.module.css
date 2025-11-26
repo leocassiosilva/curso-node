@@ -31,3 +31,16 @@
     text-decoration: none;
     font-weight: bold;
 }
+
+/* form de pets */
+.preview_pet_images {
+    display: flex;
+    margin-bottom: 1em;
+    justify-content: center;
+}
+
+.preview_pet_images img {
+    width: 100px;
+    height: 100px;
+    margin-left:1em;
+}

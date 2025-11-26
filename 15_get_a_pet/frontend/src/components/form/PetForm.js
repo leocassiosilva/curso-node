@@ -18,15 +18,15 @@ function PetForm({handleSubmit, petData, btnText}) {
     function handleColor(e) {
         setPet({ ...pet, color: e.target.options[e.target.selectedIndex].text });
     }
-    function handleSubmit(e) {
+    function submit(e) {
         e.preventDefault();
         console.log(pet);
-        //handleSubmit(pet);
+        handleSubmit(pet);
     }
     return (
-        <form onSubmit={handleSubmit} className={formStyles.form_container}>
+        <form onSubmit={submit} className={formStyles.form_container}>
         
-        <div>
+        <div className={formStyles.preview_pet_images}>
             {preview.length > 0 
                 ? preview.map((image, index) => (
                     <img 
